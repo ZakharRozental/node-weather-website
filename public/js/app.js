@@ -13,7 +13,7 @@ event.preventDefault();
 
 const location = search.value
 
-fetch('http://localhost:3000/weather?city='+location).then((response)=>{
+fetch('/weather?city='+location).then((response)=>{
 response.json().then((data)=>{
     if(data.error){
         messageOne.textContent = data.error
