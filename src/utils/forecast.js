@@ -1,0 +1,24 @@
+const request = require('request')
+
+
+const forecast = (latitude,longitude, callback) =>{
+    const url = 'http://api.weatherstack.com/current?access_key=e8eea907ae9376e9d28f0cb5c36bc1b3&query='+ latitude+','+longitude
+
+    request({url, json: true}, (error, {body}) =>{
+        if(error){
+            callback('Unbale to connect to location services', undefined)
+        }else if (body.error){
+            callback('Coordinate Error', undefined)
+        }else{
+              const originalDegree=body.current.temperature
+              const feelsLike =body.current.feelslike
+              
+              callback(undefined, 
+                'The original tyemperature is: '+ originalDegree+' and it feels like: '+ feelsLike
+                
+            )
+        }
+    })
+}
+
+module.exports = forecast
